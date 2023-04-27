@@ -14,7 +14,11 @@ It's 60 lines of code, but who wants to write or maintain something that should 
 ## Usage:
 
 ```
-import * as http from "./http-client";
+npm i fetch-unfucked
+```
+
+```
+import * as http from "fetch-unfucked";
 
 const { body } = await http.get(
   `https://someUrl.com/some/endpoint`
