@@ -61,6 +61,10 @@ export const fetchUnfucked = async (
     body: body ? JSON.stringify(body) : null,
   };
 
+  if (!headers) {
+    headers = {};
+  }
+
   if (!headers.Accept) {
     headers.Accept = CONTENT_TYPES.JSON;
   }
