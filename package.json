@@ -1,9 +1,12 @@
 {
   "name": "fetch-unfucked",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "description": "You know how you always have to write a wrapper around fetch to have sensible defaults? This is that wrapper.",
   "module": "dist/index.mjs",
   "types": "dist/index.d.ts",
+  "exports": {
+    "import": "./dist/index.mjs"
+  },
   "private": false,
   "scripts": {
     "clean": "rm -f dist/*",
