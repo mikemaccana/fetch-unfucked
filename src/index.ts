@@ -6,14 +6,6 @@ export const CONTENT_TYPES = {
   HTML: "text/html",
 };
 
-export const get = async (
-  uri: string,
-  headers: Record<string, string> | null = null,
-  forceResponseContentType: string | null = null
-) => {
-  return fetchUnfucked(uri, "GET", headers, null, forceResponseContentType);
-};
-
 interface UnfuckedResponse {
   status: string;
   headers: Record<string, unknown>;
@@ -21,8 +13,32 @@ interface UnfuckedResponse {
   body: any;
 }
 
+interface UrlWithParams {
+  url: string;
+  params: Record<string, string>;
+}
+
+const urlAndQueryParamsToString = (urlWithParams: UrlWithParams) => {
+  const queryParamsString = new URLSearchParams(urlWithParams.params);
+  return `${urlWithParams.url}?${queryParamsString}`;
+};
+
+export const get = async (
+  urlOrURLWithParams: string | UrlWithParams,
+  headers: Record<string, string> | null = null,
+  forceResponseContentType: string | null = null
+) => {
+  return fetchUnfucked(
+    urlOrURLWithParams,
+    "GET",
+    headers,
+    null,
+    forceResponseContentType
+  );
+};
+
 export const post = async (
-  uri: string,
+  uri: string | UrlWithParams,
   headers: Record<string, string> | null = null,
   body: Record<string, unknown>,
   forceResponseContentType: string | null = null
@@ -31,20 +47,29 @@ export const post = async (
 };
 
 export const fetchUnfucked = async (
-  uri: string,
+  url: string | UrlWithParams,
   method = "GET",
   headers: Record<string, string> | null = {},
   body: Record<string, unknown> | null,
   forceResponseContentType: string | null = null
 ) => {
+  if (typeof url !== "string") {
+    url = urlAndQueryParamsToString(url);
+  }
   const options: RequestInit = {
     method,
     body: body ? JSON.stringify(body) : null,
   };
+
+  if (!headers.Accept) {
+    headers.Accept = CONTENT_TYPES.JSON;
+  }
+
   if (headers && Object.keys(headers).length) {
     options.headers = headers;
   }
-  const rawResponse = await fetch(uri, options);
+
+  const rawResponse = await fetch(url, options);
 
   const cleanResponse: UnfuckedResponse = {
     status: rawResponse.statusText,
