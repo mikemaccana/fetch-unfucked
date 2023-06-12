@@ -1,17 +1,18 @@
 # fetch-unfucked
 
-## You know how you always have to write a wrapper around fetch to have sensible defaults, for every new project? This is that wrapper.
+A zero dependencies, sensible defaults HTTP client based on `fetch()`.
 
+> You know how you always have to write a wrapper around fetch to have sensible defaults, for every new project? This is that wrapper.
+
+ - **Zero dependencies**. No unnecessary `fetch` polyfills. Just use node 18 or newer.
+ - **TypeScript** and **ESM** obviously.
+ - **Sensible defaults** - sets `Accept` to JSON by default, sets `Content-Type` header to use JSON by default.
  - **get()**, **post()**, maybe other verbs if you or I add them.
  - **Returns a plain JS object** with `headers`, `body`, and `status` (as text, not magic numbers).
  - **Automatically decodes bodies based on HTTP content types**, so JSON response bodies are JS objects, HTML and text bodies are strings.
- - **Encodes query strings** - instead of a url string, provide an object of the format `{ url: string; params: Record<string, string>; }` and the query pamarameters will be encoded for your
- - **Sensible defaults** - sets `Accept` header to use JSON if unspecified, assumes `Content-Type` header to use JSON if unspecified.
- - **TypeScript**
- - **ESM**.
- - **Zero dependencies**. No unnecessary `fetch` polyfills. Just use node 18 or newer.
+ - **Encodes query strings** - instead of a url string, provide an object of the format `{ url: string; params: Record<string, string>; }` and the query parameters will be encoded for you.
 
-It's 100 lines of code, but who wants to write or maintain something that should have been baked in, and that we already had in a billion libraries before `fetch` decided to come along and have the dumbest defaults since `querySelectorAll` returned `NodeList`s? God why can't we have nice things? 🤦🏻‍♂️ 
+It's 100 lines of code, but who wants to write or maintain something that should have been baked in to JavaScript, and that we already had in a billion libraries before `fetch` decided to come along and have the dumbest defaults since `querySelectorAll` returned `NodeList`s? God why can't we have nice things? 🤦🏻‍♂️ 
 
 ## Usage:
 
@@ -23,7 +24,6 @@ Then just GET:
 
  - Function `get`
  - Type: `(urlOrURLWithParams: string or UrlWithParams, headers?: Record<string, string>, forceResponseContentType?: string) => Promise<UnfuckedResponse>` |
-
 
 For example:
 
@@ -62,7 +62,7 @@ You can add a POST body, set headers. Whatever. Look at the TypeScript types. It
 
 ### 1.2 
 
- - Provide a { url, params } instead of a a string to encode query params
+ - Provide a `{ url, params }` object instead of a string to encode query params
  - Set default values if `Accept` header isn't specified
  - Remove CommonJS
 

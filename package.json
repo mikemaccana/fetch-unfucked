@@ -1,6 +1,6 @@
 {
   "name": "fetch-unfucked",
-  "version": "1.2.4",
+  "version": "1.2.5",
   "description": "You know how you always have to write a wrapper around fetch to have sensible defaults? This is that wrapper.",
   "private": false,
   "scripts": {
