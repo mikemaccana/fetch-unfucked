@@ -21,6 +21,12 @@ npm i fetch-unfucked
 
 Then just GET:
 
+ - Function `get`
+ - Type: `(urlOrURLWithParams: string or UrlWithParams, headers?: Record<string, string>, forceResponseContentType?: string) => Promise<UnfuckedResponse>` |
+
+
+For example:
+
 ```js
 import * as http from "fetch-unfucked";
 
@@ -30,7 +36,13 @@ const { body } = await http.get(
 const dataICareAbout = body?.info?.resolved || null;
 ```
 
-Or for a POST, with query string encoding: 
+or POST:
+
+ - Function `post`
+ - Type `(uri: string or UrlWithParams, headers?: Record<string, string>, body?: Record<string, unknown>, forceResponseContentType?: string) => Promise<UnfuckedResponse>` 
+
+
+For example, with query string encoding: 
 
 ```js
 const response = await http.post(

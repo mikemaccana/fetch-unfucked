@@ -40,7 +40,7 @@ export const get = async (
 export const post = async (
   uri: string | UrlWithParams,
   headers: Record<string, string> | null = null,
-  body: Record<string, unknown>,
+  body: Record<string, unknown> | null = null,
   forceResponseContentType: string | null = null
 ) => {
   return fetchUnfucked(uri, "POST", headers, body, forceResponseContentType);
