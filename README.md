@@ -26,7 +26,7 @@ npm i fetch-unfucked
 import * as http from "fetch-unfucked";
 ```
 
-###  **get()**
+#### **get()**
 
  - **urlOrURLWithParams** - required. Either a `string`, or a `{ string: someURL, params: { encode: me } }` if you want some URL parameters to be encoded. 
  - **headers** optional. An object of headers. The `Accept` header will be set to `application/json` by default.
@@ -34,7 +34,7 @@ import * as http from "fetch-unfucked";
 
 Returns a **Promise** of a **Response** object, with **status**, **headers**, and **body**
 
-#### Example: basic get()
+##### Example: basic get()
 
 ```typescript
 import * as http from "fetch-unfucked";
@@ -44,7 +44,7 @@ const { body } = await http.get(
 );
 const dataICareAbout = body?.info?.resolved || null;
 ```
-## post() 
+#### post() 
 
  - **urlOrURLWithParams** - required. Either a `string`, or a `{ string: someURL, params: { encode: me } }` if you want some URL parameters to be encoded. 
  - **headers** optional. An object of headers. The `Accept` header will be set to `application/json` by default.
@@ -53,7 +53,7 @@ const dataICareAbout = body?.info?.resolved || null;
 
 Returns a **Promise** of a **Response** object, with **status**, **headers**, and **body**
 
-#### Example: post() ing to GitHub
+##### Example: post() ing to GitHub
 
 ```typescript
 const response = await http.post(
