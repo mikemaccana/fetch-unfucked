@@ -20,14 +20,23 @@ It's 100 lines of code, but who wants to write or maintain something that should
 npm i fetch-unfucked
 ```
 
-Then just GET:
+### Importing 
 
- - Function `get`
- - Type: `(urlOrURLWithParams: string or UrlWithParams, headers?: Record<string, string>, forceResponseContentType?: string) => Promise<UnfuckedResponse>` |
+```typescript
+import * as http from "fetch-unfucked";
+```
 
-For example:
+###  **get()**
 
-```js
+ - **urlOrURLWithParams** - required. Either a `string`, or a `{ string: someURL, params: { encode: me } }` if you want some URL parameters to be encoded. 
+ - **headers** optional. An object of headers. The `Accept` header will be set to `application/json` by default.
+ - **forceResponseContentType** optional. Ignores the content type used by the remote server when decoding the response. This only exists because [nftstorage.link](https://nftstorage.link) uses `text/plain` for JSON.
+
+Returns a **Promise** of a **Response** object, with **status**, **headers**, and **body**
+
+#### Example: basic get()
+
+```typescript
 import * as http from "fetch-unfucked";
 
 const { body } = await http.get(
@@ -35,16 +44,18 @@ const { body } = await http.get(
 );
 const dataICareAbout = body?.info?.resolved || null;
 ```
+## post() 
 
-or POST:
+ - **urlOrURLWithParams** - required. Either a `string`, or a `{ string: someURL, params: { encode: me } }` if you want some URL parameters to be encoded. 
+ - **headers** optional. An object of headers. The `Accept` header will be set to `application/json` by default.
+ - **body** optional. The JS object you're posting.
+ - **forceResponseContentType** optional. Ignores the content type used by the remote server when decoding the response. This only exists because [nftstorage.link](https://nftstorage.link) uses `text/plain` for JSON.
 
- - Function `post`
- - Type `(uri: string or UrlWithParams, headers?: Record<string, string>, body?: Record<string, unknown>, forceResponseContentType?: string) => Promise<UnfuckedResponse>` 
+Returns a **Promise** of a **Response** object, with **status**, **headers**, and **body**
 
+#### Example: post() ing to GitHub
 
-For example, with query string encoding: 
-
-```js
+```typescript
 const response = await http.post(
   { 
     url: 'https://github.com/login/oauth/access_token',
