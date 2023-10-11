@@ -1,6 +1,7 @@
 {
   "name": "fetch-unfucked",
   "version": "1.2.7",
+  "main": "dist/index.mjs",
   "description": "You know how you always have to write a wrapper around fetch to have sensible defaults? This is that wrapper.",
   "private": false,
   "scripts": {
